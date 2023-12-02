@@ -3,18 +3,21 @@ with open('day_01_input.txt', 'r') as f:
     puzz_input = [list(instruc) for instruc in raw_input]
 
 calibration_value = 0
-for i in range(len(puzz_input)):
+for puzz_line in puzz_input:
     first_digit = None
-    for char in puzz_input[i]:
-        if char.isdigit():
-            first_digit = char
-            break
-
     last_digit = None
-    for r in range(len(puzz_input[i])-1, -1, -1):
-        if puzz_input[i][r].isdigit():
-            last_digit = puzz_input[i][r]
-            break
+    first = 0
+    last = len(puzz_line)-1
+
+    while first < len(puzz_line) and last >= 0:
+        if puzz_line[first].isdigit() and not first_digit:
+            first_digit = puzz_line[first]
+
+        if puzz_line[last].isdigit() and not last_digit:
+            last_digit = puzz_line[last]
+
+        first += 1
+        last -= 1
 
     calibration_value += (int(first_digit + last_digit))
 
