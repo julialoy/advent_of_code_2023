@@ -8,19 +8,22 @@ calibration_value = 0
 for puzz in raw_input:
     first_digit = None
     first_digit_ind = -1
-    for i in range(len(puzz)):
-        if puzz[i].isdigit():
-            first_digit = puzz[i]
-            first_digit_ind = i
-            break
-
     last_digit = None
     last_digit_ind = -1
-    for r in range(len(puzz)-1, -1, -1):
-        if puzz[r].isdigit():
-            last_digit = puzz[r]
-            last_digit_ind = r
-            break
+    first = 0
+    last = len(puzz) - 1
+
+    while first < len(puzz) and last >= 0:
+        if puzz[first].isdigit() and not first_digit:
+            first_digit = puzz[first]
+            first_digit_ind = first
+
+        if puzz[last].isdigit() and not last_digit:
+            last_digit = puzz[last]
+            last_digit_ind = last
+
+        first += 1
+        last -= 1
 
     for k,v in digit_dict.items():
         first_target_ind = puzz.find(k)
